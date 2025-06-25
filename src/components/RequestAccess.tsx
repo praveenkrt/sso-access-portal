@@ -5,13 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { User, Mail, Building, MessageSquare, Send, Loader2 } from "lucide-react";
+import { User, Mail, MessageSquare, Send, Loader2 } from "lucide-react";
 
 const RequestAccess = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
     email: "",
-    company: "",
     reason: ""
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -38,15 +36,13 @@ const RequestAccess = () => {
       });
       // Reset form
       setFormData({
-        fullName: "",
         email: "",
-        company: "",
         reason: ""
       });
     }, 2000);
   };
 
-  const isFormValid = formData.fullName && formData.email && formData.company && formData.reason;
+  const isFormValid = formData.email;
 
   return (
     <div className="space-y-6">
@@ -56,30 +52,11 @@ const RequestAccess = () => {
         </div>
         <h3 className="text-lg font-semibold text-gray-900">Request Account Access</h3>
         <p className="text-sm text-gray-600">
-          Fill out the form below and we'll get you set up
+          Enter your email to request access
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
-            Full Name
-          </Label>
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              id="fullName"
-              name="fullName"
-              type="text"
-              placeholder="John Doe"
-              value={formData.fullName}
-              onChange={handleInputChange}
-              className="pl-10 h-12 border-gray-200 focus:border-green-500 focus:ring-green-500"
-              required
-            />
-          </div>
-        </div>
-
         <div className="space-y-2">
           <Label htmlFor="email" className="text-sm font-medium text-gray-700">
             Email Address
@@ -100,27 +77,8 @@ const RequestAccess = () => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="company" className="text-sm font-medium text-gray-700">
-            Company / Organization
-          </Label>
-          <div className="relative">
-            <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              id="company"
-              name="company"
-              type="text"
-              placeholder="Acme Corporation"
-              value={formData.company}
-              onChange={handleInputChange}
-              className="pl-10 h-12 border-gray-200 focus:border-green-500 focus:ring-green-500"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="space-y-2">
           <Label htmlFor="reason" className="text-sm font-medium text-gray-700">
-            Reason for Access
+            Reason for Access <span className="text-gray-400 text-xs">(Optional)</span>
           </Label>
           <div className="relative">
             <MessageSquare className="absolute left-3 top-3 text-gray-400 h-4 w-4" />
@@ -131,7 +89,6 @@ const RequestAccess = () => {
               value={formData.reason}
               onChange={handleInputChange}
               className="pl-10 pt-3 min-h-[100px] border-gray-200 focus:border-green-500 focus:ring-green-500 resize-none"
-              required
             />
           </div>
         </div>
